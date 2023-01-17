@@ -47,7 +47,7 @@ class Brackets extends Item{
   bool isBrac() => true;
   
 
-  bool iAbsolute ()=>false;
+  bool isAbsolute ()=>false;
   List<Item>? content() => null;
   
 }

@@ -1,9 +1,35 @@
-import 'dart:ffi';
-import 'dart:html';
+
+import 'dart:js_util';
+
 import 'package:match/match.dart';
 import 'package:math_functions/calculate/operators.dart';
 
 import 'package:math_functions/calculate/types.dart';
+
+
+bool isWhitespace(String input){
+  bool i;
+  switch (input) {
+    case " ":
+      i = true;
+      break;
+    case "\t":
+      i = true;
+      break;
+    case "\n":
+      i = true;
+      break;
+    default:
+      i = false;
+  }
+  
+  return i;
+
+}
+
+
+
+
 
 List<Item> divideToItems(String input){
   int index = 0;
@@ -18,7 +44,10 @@ List<Item> divideToItems(String input){
     ///brackets
     ///unknown vars
     //number
-
+    if(isWhitespace(input[index])){
+      index++;
+      continue;
+    }
 
   ///parse number
     if(num.tryParse(input[index]) != null){
@@ -66,12 +95,16 @@ List<Item> divideToItems(String input){
 
   input[index].match({
     eq('(') | eq('{') | eq('['): (){
-      
-      
+      Brackets b = Brackets(openBracketPos: itemList.length);
+      itemList.add(b);
+      trackOpenBrackets.add(b);
     },
 
     eq(')') | eq('}') | eq(']'): (){
-      
+      Brackets b = trackOpenBrackets.last;
+      if (!b.isAbsolute()) {
+        b.content()!.addAll(itemList.getRange(b.openBracketPos, itemList.length));
+      }
     }
 
 
