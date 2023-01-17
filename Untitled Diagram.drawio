@@ -1,1 +1,31 @@
-<mxfile host="app.diagrams.net" modified="2023-01-17T01:32:55.898Z" agent="5.0 (X11)" version="20.8.5" etag="uZszA5BwzG5xNIE0jYR1" type="github"><diagram id="hjEm12OlXTJblvV2okMU">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-01-17T02:17:20.731Z" agent="5.0 (X11)" version="20.8.5" etag="OAyg1uKr6JFzPb7AVp0E" type="github">
+  <diagram id="DtXqf0S3KLXC3uquicLb" name="Page-1">
+    <mxGraphModel dx="978" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2pv7KV363uQilXXTCo94-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2pv7KV363uQilXXTCo94-2" target="2pv7KV363uQilXXTCo94-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2pv7KV363uQilXXTCo94-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2pv7KV363uQilXXTCo94-2" target="2pv7KV363uQilXXTCo94-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2pv7KV363uQilXXTCo94-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2pv7KV363uQilXXTCo94-2" target="2pv7KV363uQilXXTCo94-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2pv7KV363uQilXXTCo94-2" value="main page" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="150" width="300" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2pv7KV363uQilXXTCo94-3" value="calculator page" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="390" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="2pv7KV363uQilXXTCo94-4" value="practice page" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="390" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="2pv7KV363uQilXXTCo94-5" value="content page" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="390" width="300" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
