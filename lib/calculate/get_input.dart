@@ -1,29 +1,26 @@
 
-///to do
-///
-///make class for every operator add, sub, div, mul
-///
+
+import 'package:math_functions/calculate/calculate_numeric.dart';
+import 'package:math_functions/calculate/types.dart';
+
+import "parser.dart";
+
+// output format
+class Output {
+  String answer;
+  bool isSolved;
+  Output({required this.answer, required this.isSolved});
+}
+// 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-String get_input(String input){
+String solveProblem(String input){
  
 // have string input
+  Expresions a = calculateNumeric(divideToItems(input));
+  
 
 
 
-
-
-  return '';
+  return a.numValue().toString();
 }

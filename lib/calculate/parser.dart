@@ -1,10 +1,13 @@
-
-import 'dart:js_util';
-
+ 
 import 'package:match/match.dart';
 import 'package:math_functions/calculate/operators.dart';
 
 import 'package:math_functions/calculate/types.dart';
+
+
+
+///negative numbers
+///
 
 
 bool isWhitespace(String input){
@@ -28,6 +31,13 @@ bool isWhitespace(String input){
 }
 
 
+bool isProblemWrong = false;
+
+
+error(){
+  isProblemWrong = true;
+  return -69;
+}
 
 
 
@@ -39,11 +49,7 @@ List<Item> divideToItems(String input){
 
   while (index< input.length) {
     
-    ///whitepace
-    ///operators
-    ///brackets
-    ///unknown vars
-    //number
+    
     if(isWhitespace(input[index])){
       index++;
       continue;
@@ -53,9 +59,9 @@ List<Item> divideToItems(String input){
     if(num.tryParse(input[index]) != null){
       bool isFullNum = true;
       List<String> number = [];
-      while (true) {
+      while (true && index < input.length) {
 
-        if(num.tryParse(input[index]) != null){
+        if( num.tryParse(input[index]) != null){
           number.add(input[index++]);
           
         }else if((input[index] == '.' || input[index] == ',') && isFullNum){
@@ -68,7 +74,14 @@ List<Item> divideToItems(String input){
           break;
         }
       }
-      itemList.add(Numeric(n : num.parse(number.toString())));
+      String n = "";
+      for (var e in number) {
+        n+= e;
+      }
+
+      itemList.add(Numeric(n : num.tryParse(n, ) ?? error()));
+     
+      continue;
     }
 
     // !!add return for tracking operators, controling if problem is valid
@@ -87,25 +100,53 @@ List<Item> divideToItems(String input){
       eq('*') | eq('.'): (){
         itemList.add(Multiply());
       },
+      any:(){},
+      
   });
 
   // if input is op increase index - track base on return
 
 
-
+///parse brackets
   input[index].match({
     eq('(') | eq('{') | eq('['): (){
       Brackets b = Brackets(openBracketPos: itemList.length);
       itemList.add(b);
       trackOpenBrackets.add(b);
     },
-
+    
     eq(')') | eq('}') | eq(']'): (){
+      
       Brackets b = trackOpenBrackets.last;
-      if (!b.isAbsolute()) {
-        b.content()!.addAll(itemList.getRange(b.openBracketPos, itemList.length));
+      
+      if (!b.isAbsolute) {
+        b.content.addAll(itemList.getRange(b.openBracketPos + 1, itemList.length ));
+        itemList.removeRange(b.openBracketPos + 1, itemList.length);
+         itemList[b.openBracketPos] = b;
+        trackOpenBrackets.removeLast();
       }
-    }
+      
+      else{
+        error();
+      }
+    },
+    eq('|'):(){
+       Brackets b = trackOpenBrackets.last;
+      if(!b.isAbsolute){
+        Brackets a = Brackets(openBracketPos: itemList.length, isAbsolute: true);
+        
+        itemList.add(a);
+        trackOpenBrackets.add(a);
+      }
+      else{
+        b.content.addAll(itemList.getRange(b.openBracketPos + 1, itemList.length));
+        itemList.removeRange(b.openBracketPos + 1, itemList.length - 1);
+        itemList[b.openBracketPos] = b;
+        trackOpenBrackets.removeLast();
+      }
+
+    },
+    any: (){},
 
 
   });
@@ -120,7 +161,7 @@ List<Item> divideToItems(String input){
 
 
 
-    
+    index++;
   }
 
 

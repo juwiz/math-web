@@ -37,7 +37,8 @@ abstract class Operator extends Item {
 class Brackets extends Item{
 
   int openBracketPos;
-  Brackets({required this.openBracketPos });
+   bool isAbsolute = false;
+  Brackets({required this.openBracketPos , isAbsolute});
 
 
 
@@ -47,9 +48,8 @@ class Brackets extends Item{
   bool isBrac() => true;
   
 
-  bool isAbsolute ()=>false;
-  List<Item>? content() => null;
-  
+ 
+ List<Item> content = []; 
 }
 
 
