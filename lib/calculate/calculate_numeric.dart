@@ -28,7 +28,6 @@ Expresions calculateNumeric(List<Item> input){
       Operator o = input[i].getOp()!;
       Expresions lVar = input[i - 1].getExp()!;
       Expresions rVar = input[i + 1].getExp()!;
-      
       input[i- 1] = o.combine(lVar, rVar);
       input.removeRange(i, i + 2);
 
