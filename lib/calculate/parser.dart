@@ -31,21 +31,41 @@ bool isWhitespace(String input){
 }
 
 
-bool isProblemWrong = false;
 
 
-error(){
-  isProblemWrong = true;
-  return -69;
+class ParseOutput {
+  List<Item> output;
+  bool isProblemWrong = false;
+  String errorOutput = ''; 
+  ParseOutput({required this.output});
+
+ 
 }
+ 
 
 
 
-List<Item> divideToItems(String input){
+
+ParseOutput divideToItems(String input){
   int index = 0;
+
+
+
+//checking for operators changing nums to negative
+int negCheck = 1;
+String negCheckOp = '';
+//  2 + -  are assosiated with numbers
+// 1 operators stand by themself
 
   List<Item> itemList = [];
   List<Brackets> trackOpenBrackets = [];
+  ParseOutput output = ParseOutput(output: itemList);
+
+  error(String errorMessage){
+ output.errorOutput = errorMessage;
+  output.isProblemWrong = true;
+  return -1;
+}
 
   while (index< input.length) {
     
@@ -59,6 +79,12 @@ List<Item> divideToItems(String input){
     if(num.tryParse(input[index]) != null){
       bool isFullNum = true;
       List<String> number = [];
+      
+       if (negCheck == 2) {
+         
+          number.add(negCheckOp);
+        }
+
       while (true && index < input.length) {
 
         if( num.tryParse(input[index]) != null){
@@ -78,27 +104,60 @@ List<Item> divideToItems(String input){
       for (var e in number) {
         n+= e;
       }
-
-      itemList.add(Numeric(n : num.tryParse(n, ) ?? error()));
-     
+      
+      itemList.add(Numeric(n : num.tryParse(n, ) ?? error("wrong number")));
+      negCheck = 0;
       continue;
     }
 
-    // !!add return for tracking operators, controling if problem is valid
+    
 
     ///parse operators
     input[index].match({
       eq('+'): (){
-        itemList.add(Add());
+         if (negCheck == 1) {
+          negCheckOp = '+';
+          negCheck = 2;
+         
+        }
+        else if(negCheck == 2){
+          error('too many operators');
+          
+        }
+        else{
+           itemList.add(Add());
+           negCheck = 1;
+        }
       },
       eq('-'): (){
-        itemList.add(Subtract());
+        if (negCheck == 1) {
+          negCheckOp = '-';
+          negCheck = 2;
+        }else if(negCheck == 2){
+          error('too many operators');
+          
+        }
+        else{
+           itemList.add(Subtract());
+            negCheck = 1;
+        }
+       
       },
       eq('/') | eq(':'): (){
+         if(negCheck == 2){
+          error('too many operators');
+         
+        }
         itemList.add(Divide());
+        negCheck = 1;
       },
       eq('*') | eq('.'): (){
+        if(negCheck == 2){
+          error('too many operators');
+          
+        }
         itemList.add(Multiply());
+        negCheck = 1;
       },
       any:(){},
       
@@ -127,7 +186,7 @@ List<Item> divideToItems(String input){
       }
       
       else{
-        error();
+        error("wrong bracket order");
       }
     },
     eq('|'):(){
@@ -153,7 +212,10 @@ List<Item> divideToItems(String input){
     
 
 
-
+  if (output.isProblemWrong) {
+    output.output = itemList;
+    break;
+  }
 
 
 
@@ -163,7 +225,16 @@ List<Item> divideToItems(String input){
 
     index++;
   }
+  if (trackOpenBrackets.isNotEmpty) {
+    error("Not enought brackets");
+    
+  }
+  if (!output.isProblemWrong) {
+    output.output = itemList;
+  }
+  
 
 
- return itemList;
+
+ return output;
 }

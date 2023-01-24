@@ -13,10 +13,12 @@
 
 
 
+
 class Item {
   bool isOp() => false;
   bool isExp() => false;
   bool isBrac() => false;
+  String asString() => '';
 
   Expresions? getExp() => null;
   Operator? getOp() => null;
@@ -46,8 +48,31 @@ class Brackets extends Item{
   Brackets? getBrac() => this;
   @override
   bool isBrac() => true;
-  
 
+
+
+  String s (){
+    String s = '';
+    if (isAbsolute) {
+      s = '|';
+    }
+    else{
+      s = '{';
+    }
+    for (var e in content) {
+      s+= e.asString();
+    }
+     if (isAbsolute) {
+      s += '|';
+    }
+    else{
+      s += '}';
+    }
+    return s;
+  }
+  
+  @override 
+  String asString() => s();
  
  List<Item> content = []; 
 }
@@ -69,6 +94,8 @@ class Numeric extends Expresions  {
 
   @override
   num? numValue() => n;
+  @override 
+  String asString() => n.toString();
 }
 
 

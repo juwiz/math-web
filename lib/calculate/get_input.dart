@@ -9,6 +9,7 @@ import "parser.dart";
 class Output {
   String answer;
   bool isSolved;
+  
   Output({required this.answer, required this.isSolved});
 }
 // 
@@ -16,11 +17,14 @@ class Output {
 
 String solveProblem(String input){
  
+ ParseOutput dividedOutput =  divideToItems(input);
+ if(dividedOutput.isProblemWrong){
+  return dividedOutput.errorOutput;}
 // have string input
-  Expresions a = calculateNumeric(divideToItems(input));
+  Solution a = calculateNumeric(dividedOutput.output);
   
 
+  print(a.steps);
 
-
-  return a.numValue().toString();
+  return a.answer;
 }

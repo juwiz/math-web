@@ -5,6 +5,8 @@ class Add extends Operator {
   Expresions combine(Expresions a, Expresions b) {
     return Numeric(n: a.numValue()! + b.numValue()!);
   }
+  @override 
+  String asString() => '+';
 }
 
 class Subtract extends Operator {
@@ -12,6 +14,8 @@ class Subtract extends Operator {
   Expresions combine(Expresions a, Expresions b) {
     return Numeric(n: a.numValue()! - b.numValue()!);
   }
+  @override 
+  String asString() => '-';
 }
 
 class Divide extends Operator {
@@ -19,6 +23,8 @@ class Divide extends Operator {
   Expresions combine(Expresions a, Expresions b) {
     return Numeric(n: a.numValue()! / b.numValue()!);
   }
+  @override 
+  String asString() => '/';
 }
 
 class Multiply extends Operator {
@@ -26,4 +32,6 @@ class Multiply extends Operator {
   Expresions combine(Expresions a, Expresions b) {
     return Numeric(n: a.numValue()! * b.numValue()!);
   }
+  @override 
+  String asString() => '*';
 }
